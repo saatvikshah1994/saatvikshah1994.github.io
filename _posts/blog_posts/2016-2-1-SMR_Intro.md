@@ -1,0 +1,288 @@
+---
+layout: post
+title: Sentiment Analysis Primer - Part 1
+image:
+  feature: /smr_intro/smileys-bg.jpg 
+description: "Sentiment Analysis Primer"
+tags: [sentiment analysis,machine learning]
+category: blog-post
+---
+
+<!-- For addressing the multi-image captioning feature-->
+<style>
+.half div {
+  float: left;
+  width: 50%;
+  padding-right: 10px;
+}
+
+.fifth div {
+  float: left;
+  width: 20%;
+  padding-right: 10px;
+}
+</style>
+
+<h2 id='intro'>Introduction</h2>
+The *Sentiment Analysis Primer* series is my attempt at documenting the work I'm doing as part of my **Bachelor's thesis** to facilitate better understanding of this domain. I'll start from the simplest dictionary matching techniques and build up to more complicated techniques involving Deep and Aspect based learning. In order to save you from the pain of finding resources all the resources I had to find, I've added a set of the most essential references which are easy to follow and external links wherever necessary.<br> 
+This post introduces the datasets and preprocessing that will remain common throughout the series. We'll also look at two of the simplest possible techniques for Sentiment Analysis.
+
+<h2 id="outline">Outline</h2>
+<ol style="line-height:1.2em">
+<li><a href="#dset">Datasets and Metrics</a></li>
+<li><a href="#preproc">Text Preprocessing</a></li>
+<li><a href="#approaches">Approaches</a>
+<ul style="line-height:0.9em;padding-top:0.2em">
+<li style="font-size:0.9em;"><a href="#dict">Simple Dictionary Lookup</a></li>
+<li style="font-size:0.9em"><a href="#bow">Bag-of-Words</a></li>
+</ul></li>
+<li><a href="#whatsnext">What's next ?</a></li>
+<li><a href="#refs">References</a></li>
+</ol>
+
+<h2 id="dset">Datasets and Metrics</h2>
+We'll be using two standard sentiment analysis datasets of movie reviews - the [Large Movie Review Dataset](http://ai.stanford.edu/~amaas/data/sentiment/) by Stanford AI Lab and the [Rotten Tomatoes Dataset](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews/data) as available on a recent Kaggle competition.
+<h3>Large Movie Review Dataset</h3>
+This is one of the largest available movie review sentiment corpus with *50,000* reviews, equally divided into training and testing samples. It has a binary labelling scheme, with **0** representing *-ve* sentiment and **1** representing *+ve* sentiment. 
+
+Let's look at a few sentences after running some textual cleanup and preprocessing(exact steps of preprocessing are elaborated later). 
+
+~~~
+Label 0 : -ve review
+starts manager nicholas bell giving welcome investors robert carradine primal park secret project mutating primal animal using fossilized dna like jurassik park scientists resurrect one nature fearsome predators sabretooth tiger smilodon scientific ambition turns deadly however high voltage fence opened creature escape begins savagely stalking prey human 
+visitors tourists scientific meanwhile youngsters enter restricted area security center attacked pack large pre historical animals deadlier bigger addition security agent stacy haiduk mate brian wimmer fight hardly carnivorous smilodons sabretooths course real star stars astounding terrifyingly though convincing giant animals savagely 
+stalking prey group run afoul fight one nature fearsome predators furthermore third sabretooth dangerous slow stalks victims delivers goods lots blood gore beheading hair raising chills full scares sabretooths appear mediocre special effects story provides exciting stirring entertainment results quite boring giant animals majority made computer 
+generator seem totally lousy middling performances though players reacting appropriately becoming food actors give vigorously physical performances dodging beasts running bound leaps dangling walls packs ridiculous final deadly scene small kids realistic gory violent attack scenes films sabretooths smilodon following sabretooth james hickox 
+vanessa angel david keith john rhys davies much better bc roland emmerich steven strait cliff curtis camilla belle motion picture filled bloody moments badly directed george miller originality takes many elements previous films miller australian director usually working television tidal wave journey center earth many others occasionally cinema man 
+snowy river zeus roxanne robinson crusoe rating average bottom barrel
+~~~
+~~~
+Label 1 : +ve review
+stuff going moment mj ve started listening music watching odd documentary watched wiz watched moonwalker maybe want get certain insight guy thought really cool eighties maybe make mind whether guilty innocent moonwalker part biography part feature remember going see cinema originally released subtle messages mj feeling towards press also obvious message drugs 
+bad kay visually impressive course michael jackson unless remotely like mj anyway going hate find boring may call mj egotist consenting making mj fans would say made fans true really nice actual feature bit finally starts minutes excluding smooth criminal sequence joe pesci convincing psychopathic powerful drug lord wants mj dead bad beyond mj 
+overheard plans nah joe pesci character ranted wanted people know supplying drugs etc dunno maybe hates mj music lots cool things like mj turning car robot whole speed demon sequence also director must patience saint came filming kiddy bad sequence usually directors hate working one kid let alone whole bunch performing complex dance scene bottom line people 
+like mj one level another think people stay away try give wholesome message ironically mj bestest buddy girl michael jackson truly one talented people ever grace planet guilty well attention ve gave subject hmmm well know people different behind closed doors know fact either extremely nice stupid guy one sickest liars hope latter
+~~~
+
+Since these are **really** long, let's instead gain some insight by looking at the Wordclouds formed by combining the positive and negative reviews: 
+
+<div class="half">
+  <div> 
+    <a href="{{ site.baseurl }}/images/smr_intro/wordcloud_stanford_0_black.png"><img src="{{ site.baseurl }}/images/smr_intro/wordcloud_stanford_0_black.png" alt=""></a>
+    <center><h5 style="margin-top:-1em"><b>Negative(0) Sentiment Wordcloud</b></h5></center>
+  </div>
+  <div> 
+    <a href="{{ site.baseurl }}/images/smr_intro/wordcloud_stanford_1_white.png"><img src="{{ site.baseurl }}/images/smr_intro/wordcloud_stanford_1_white.png" alt=""></a>
+    <center><h5 style="margin-top:-1em"><b>Positive(1) Sentiment Wordcloud</b></h5></center>
+  </div>
+</div>
+
+In case you don't know, a wordcloud is a pretty common visualization in textual data, where *word sizes are proportional to their occurences* in the data.
+
+1. This makes it clear that in both types of reviews, words such as **film, movie, one and time** are extremely frequent. 
+2. The positive reviews have a high count of words such as **good, well, great, best** and similar positive words.
+3. The negative reviews similarly have a high count of negative words such as **bad, worst, dont and nothing**.
+4. Finally, what's surprising is that **good** seems to be fairly frequent in both types of reviews. This could occur because of negations, such as **not** occuring before good.
+
+<h3>Rotten Tomatoes Dataset</h3>
+The Rotten Tomatoes review dataset on which we will be working has the reviews split into phrases obtained by the StanfordParser, which have been manually labelled by mechanical turks into 5 different levels.
+
+~~~
+Label 0 : --ve review
+would hard time sitting one
+~~~
+~~~
+Label 1 : -ve review
+series escapades demonstrating adage good goose also good 
+gander occasionally amuses none amounts much story
+~~~
+~~~
+Label 2 : neutral review
+series escapades demonstrating adage good goose
+~~~
+~~~
+Label 3 : +ve review
+good goose
+~~~
+~~~
+Label 4 : ++ve review
+quiet introspective entertaining independent worth seeking
+~~~
+
+Again, let's look at the Wordclouds for each individual label
+
+
+<div class="fifth">
+  <div> 
+    <a href="{{ site.baseurl }}/images/smr_intro/wordcloud_cornell_0_black.png"><img src="{{ site.baseurl }}/images/smr_intro/wordcloud_cornell_0_black.png" alt=""/></a>
+    <center><h5 style="margin-top:-0.5em"><b>Extremely Negative(0)</b></h5></center>
+  </div>
+  <div> 
+    <a href="{{ site.baseurl }}/images/smr_intro/wordcloud_cornell_1_black.png"><img src="{{ site.baseurl }}/images/smr_intro/wordcloud_cornell_1_black.png" alt=""/></a>
+    <center><h5 style="margin-top:-0.5em"><b>Negative(1)</b></h5></center>
+  </div>
+  <div> 
+    <a href="{{ site.baseurl }}/images/smr_intro/wordcloud_cornell_2_white.png"><img src="{{ site.baseurl }}/images/smr_intro/wordcloud_cornell_2_white.png" alt=""/></a>
+    <center><h5 style="margin-top:-0.5em"><b>Neutral(2)</b></h5></center>
+  </div>
+  <div> 
+    <a href="{{ site.baseurl }}/images/smr_intro/wordcloud_cornell_3_white.png"><img src="{{ site.baseurl }}/images/smr_intro/wordcloud_cornell_3_white.png" alt=""/></a>
+    <center><h5 style="margin-top:-0.5em"><b>Positive(3)</b></h5></center>
+  </div>
+  <div> 
+    <a href="{{ site.baseurl }}/images/smr_intro/wordcloud_cornell_4_white.png"><img src="{{ site.baseurl }}/images/smr_intro/wordcloud_cornell_4_white.png" alt=""/></a>
+    <center><h5 style="margin-top:-0.5em"><b>Extremely Positive(4)</b></h5></center>
+  </div> 
+</div>
+
+Again, we can clearly infer from the Wordclouds, the sentiment expressed, starting from high counts of **bad** in the extremely negative cloud to **best** in the extremely positive cloud.
+
+Throughout the course of this primer, both these datasets will be used for benchmarking as they cover a large corpus of reviews with differently configured labels.
+
+<h3>Metrics</h3>
+We will be using the following metrics throughout these primers:
+
+1. **Accuracy**
+2. **Confusion Matrix**
+
+You can read more about these from [here](http://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/)
+
+<h2 id="preproc">Text Preprocessing</h2>
+Often referred to as Data cleaning as well, text preprocessing generally consists of the steps of getting rid of elements in the text which add little to the sentence meaning. The steps I've followed are:
+
+1. Stripping off markup tags such as <html> or <br>
+2. Converting every alphabet to its lowercase form
+3. Applying any intermediary Regex based operations
+4. Removal of stopwords, which are extremely common words in the English language which add little meaning to sentences.
+5. Removal of words that are extremely short or malformed
+6. Removal of extra spaces in the begginning or the end
+
+Here is a class function which achieves the desired effect:
+{% highlight python linenos=table %}
+def clean_sentence(self,sentence):
+    if self.html_clean:	# Optional flag
+        sentence = BeautifulSoup(sentence).get_text()	# removing html markup
+    sentence = sentence.lower()	# everything to lowercase
+    for ch_rep in self.clean_list:	# Optional Regex Operations
+        sentence = re.sub(ch_rep[0],ch_rep[1],sentence)
+    sentence = ' '.join(filter(lambda x:x not in self.stopwords_eng,sentence.split()))	# Filtering stopwords
+    sentence = ' '.join(filter(lambda x:len(x) > 1,sentence.split()))	# Filtering low legnth words
+    sentence = sentence.strip(" ") # Remove possible extra spaces
+    return sentence
+{% endhighlight %}
+
+Note that this uses the [BeautifulSoup4](http://www.crummy.com/software/BeautifulSoup/bs4/doc/) and [re](https://docs.python.org/2/library/re.html) external libraries for cleaning markup and applying regex operations respectively.
+In preprocessing the movies dataset, I've used the stopwords coming in nltk along with a few customized for movie reviews.
+{% highlight python linenos=table %}
+from nltk.corpus import stopwords
+self.stopwords_eng = stopwords.words("english") + [u"film",u"movie"]
+{% endhighlight %}
+
+The complete preprocessing code can be found [here](https://gist.github.com/saatvikshah1994/0353fa06298f81b58cd5). Look at the **DataClean** class.
+
+<h2 id='approaches'>Approaches</h2>
+<h3 id='dict'>Simple Dictionary Lookup</h3>
+A classical technique for sentiment analysis, dictionary based lookups have recieved tons of criticism for being **inexhaustive**, **ignoring semantic meaning** and many others. Yet, they were amongst the first and simplest techniques to be applied.
+
+The steps are simple:
+
+1. Have a dictionary with a key-value pair as word:score, where score should be positive for positive words and negative for negative words.
+2. Start iterating through a given review word by word with a score counter of 0. 
+3. If the word being considered is present in the dictionary, add its score to the score counter.
+4. The final value of the score counter and the end of the review determines the label to be assigned.
+
+<figure>
+    <a href="{{ site.url }}/images/smr_intro/DBSA.png"><img src="{{ site.url }}/images/smr_intro/DBSA.png" alt="" height="500px" width="1000px" align="middle" /></a>
+    <center><figcaption style="margin-top:-1em"><b>Computing Review Score</b></figcaption></center>
+</figure>
+
+For this model we have used the [AFINN dictionary](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010)
+
+Here are some sample word-score pairs from this dictionary:
+
+~~~
+breathtaking	5
+amazing	4
+amuse	3
+accomplished	2
+achievable	1
+some kind	0
+admit	-1
+accusation	-2
+anger	-3
+bullshit	-4
+prick	-5
+~~~
+
+Code for scoring each sentence is presented below:
+{% highlight python linenos=table %}
+def compute_score(self,sentence):
+    sentence_score = 0
+    for word in sentence.split():
+        if word in self.sentiment_dict.keys():
+            sentence_score += self.sentiment_dict[word]
+    return sentence_score
+{% endhighlight %}
+**Note:** The complete script for computing dictionary based scores is at this [link](https://gist.github.com/saatvikshah1994/b1a5b1826f40e7a4e5b7). The **utilities.py** script contains some helper functions that can be found [here](https://gist.github.com/saatvikshah1994/0353fa06298f81b58cd5). Ensure that you modify the dataset path in the *load_data* method correctly.
+
+On conducting 4-fold cross validation, this model gave **35.75%** on the Rotten Tomatoes 5-level sentiment data and **56.08%** on the binary Large IMDb Movie Review dataset.
+
+Finally, if your looking for a list of the best additional dictionaries to experiment with you can check this [link](http://stackoverflow.com/questions/4188706/sentiment-analysis-dictionaries).
+
+<h3 id='bow'>Bag-Of-Words</h3>
+<h4>Introduction</h4>
+The Bag of Words is one of the most common techniques of representing textual data, especially for the purpose of applying Supervised learning algorithms. 
+Machine Learning algorithms generally require datasets to be represented as a $$N_{s}*N_{f}$$ matrix. Here $$N_{s}$$ represents number of samples in the dataset, which in our case would be the number of reviews. This can vary in the training and testing datasets. $$N_{f}$$ represents the number of features per sample which should be the same for the training and testing datasets. 
+Maintaining a constant number of features is straightforward for numerical datasets. Here's an example of the classical problem of **Predicting whether a person will survive the Titanic Disaster**([link](https://www.kaggle.com/c/titanic)). In the below diagram, we can clearly see that the number of features are fixed at four.
+<figure>
+    <center><a href="{{ site.url }}/images/smr_intro/HousePrices.png"><img src="{{ site.url }}/images/smr_intro/HousePrices.png" alt="" height="600px" width="800px"/></a></center>
+    <center><figcaption style="margin-top:-1em"><b>Titanic Dataset features</b></figcaption></center>
+</figure>
+On the other hand, since text consists of streams of variable sized sentences, we need to convert the raw data to a form which can be fed to Machine Learning algorithms. This is where the Bag-of-Words(**BOW** in short) comes into play. 
+Some terms to keep in mind:
+
+1. **Vocabulary** : This refers to a set which includes every word which is present in the data. As it is a set, each word is distinct.
+2. **Fit and Transform** : Every Machine Learning feature extraction algorithm(such as Bag of Words) consist of a fit and transform operation. The **fit** operation is applied only on the training data, where certain bits of information is extracted(use-case dependent). This is then used in the **transform** operation that is applied to both the training and testing datasets.
+3. **Sparse Matrix** : A sparse matrix is a way of representing huge matrices which have a large number of zeros in its elements. Read more [here](https://www.wikiwand.com/en/Sparse_matrix).
+
+<h4>Computing the Bag-of-Words Matrix</h4>
+
+1. The fitting stage is carried out where the vocabulary is computed from the training dataset. Let the number of words in the vocabulary be $$V$$.
+2. The transform operation is called next where a new matrix is first created of dimensions $$N_{s}*V$$. In this matrix, each row corresponds to each review/sample. Since the number of columns correspond to vocabulary size, each column represents counts of terms in the vocabulary eg. if the first(1) word in vocabulary is *good*, the (1,1) position of the BOW matrix represents the **number of times *good* appears in the 1<sup>st</sup> review**. Similarly the (2,1) position represents the number of times *good* appears in the 2<sup>nd</sup> review.
+
+<figure>
+    <center><a href="{{ site.url }}/images/smr_intro/Bag-of-Words.png"><img src="{{ site.url }}/images/smr_intro/Bag-of-Words.png" alt="" height="600px" width="800px"/></a></center>
+    <center><figcaption style="margin-top:-1em"><b>Simplifying Bag-of-Words</b></figcaption></center>
+</figure>
+It can be understood that as the number and legnth of sentences inrease the dimensions and sparsity of the BOW matrix will also increase - Thus they are generally stored in **sparse matrix** form.
+
+The BOW matrix can be directly passed to a machine learning algorithm to get a pretty decent benchmark.
+
+Here, is the code for the same:
+{% gist saatvikshah1994/e45b6917d64e363aa84b %}
+**Note:** The **utilities.py** script contains some helper functions that can be found [here](https://gist.github.com/saatvikshah1994/0353fa06298f81b58cd5). Ensure that you modify the dataset path in the *load_data* method correctly.
+
+As you can see most of the code uses [scikit-learn](http://scikit-learn.org/), where the BOW matrix is generated using the [TfIdfVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html). The classifier used is **Naive Bayes**, which in spite of being simple is surprisingly effective on text.
+The BOW matrix gives decent accuracy on binary labelled data of **84.21%** accuracy and **56.14%** on 5 level labels.
+Finally it must be kept in mind that BOW suffers from a major drawback of **lacking semantic context** since the ordering of words in the sentence is not tracked. Thus even a ML algorithm may get confused in sentences such as **"not bad but good"** as it does not know whether **not** appeared before bad or before good.
+
+<h2 id='whatsnext'>What's next?</h2>
+Next up, I'll be going into the details of a completely unsupervised system for sentiment analysis, by utilising **search engine results**.
+
+<h2 id='refs'>References</h2>
+This list currently consists of the those documents, which I feel are easiest to follow whilst being crucial. Please feel free to provide any more suggestions.
+<h3>Dictionary based Lookup</h3>
+<h4>Papers</h4>
+None
+<h4>Blogs and Websites</h4>
+
+1. [Basic Sentiment Analysis with Python](http://fjavieralba.com/basic-sentiment-analysis-with-python.html)
+2. [Be careful with Dictionary based text analysis](https://brenocon.com/blog/2011/10/be-careful-with-dictionary-based-text-analysis/)
+3. [Twitter sentiment analysis using Python and NLTK](http://www.laurentluce.com/posts/twitter-sentiment-analysis-using-python-and-nltk/)
+<h3>Bag-of-Words</h3>
+<h4>Papers</h4>
+
+1. [Thumbs up? Sentiment Classification using Machine Learning Techniques](http://www.cs.cornell.edu/home/llee/papers/sentiment.pdf)
+<h4>Blogs and Websites</h4>
+
+1. [Machine Learning::Text feature extraction(tf-idf) Part 1](http://blog.christianperone.com/2011/09/machine-learning-text-feature-extraction-tf-idf-part-i/)''

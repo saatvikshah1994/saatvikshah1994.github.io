@@ -1,8 +1,8 @@
-title:            Site Title
-description:      Describe your website here.
-disqus_shortname: 
-reading_time:     true
-words_per_minute: 200
+title:            Saatvik Shah
+description:      Tidbits of a budding researcher.
+disqus_shortname: saatvikshah1994
+reading_time:     false
+words_per_minute: 150
 # Your site's domain goes here (eg: //mmistakes.github.io, http://mademistakes.com, etc)
 # When testing locally leave blank or use http://localhost:4000
 url: https://saatvikshah1994.github.io
@@ -10,21 +10,21 @@ url: https://saatvikshah1994.github.io
 
 # Owner/author information
 owner:
-  name:           Your Name
-  avatar:         avatar.jpg
-  bio:            "Your bio goes here. It shouldn't be super long but a good two sentences or two should suffice."
-  email:          you@email.com
+  name:           Saatvik Shah
+  avatar:         myshot.png
+  bio:            "Still trying to come up with a good one liner ;)"
+  email:          saatvikshah1994@gmail.com
   # Social networking links used in footer. Update and remove as you like.
   twitter:        
   facebook:       
-  github:         
+  github: saatvikshah1994         
   stackexchange:  
   linkedin:       
   instagram:      
   flickr:         
   tumblr:         
   # google plus id, include the '+', eg +mmistakes
-  google_plus:
+  google_plus: +saatvikshah1994
 
 # Background image to be tiled on all pages
 background: 
@@ -36,7 +36,7 @@ google_verify:
 bing_verify:         
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    America/New_York
+timezone:    Asia/Kolkata
 future:      true
 highlighter: rouge
 markdown:    kramdown
