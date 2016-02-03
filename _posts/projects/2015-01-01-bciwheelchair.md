@@ -14,10 +14,10 @@ category : project
 comments: false
 ---
 
-##Where
+## Where
 [Zine Research Lab](http://zine.co.in/), NIT Jaipur
 
-##Objective
+## Objective
 A Brain Computer Interface to control a wheelchair, with:
 
 1. Using signals originating completely from the brain, and **not** sources of noise such as eye-blinks or facial gestures
@@ -30,7 +30,7 @@ A Brain Computer Interface to control a wheelchair, with:
 	<center><figcaption><b>Emotiv EEG headset</b></figcaption></center>
 </figure>
 
-##Methodology
+## Methodology
 The previous research on Motor-Imagery and P300 EEG were pivotal starting points for this project. Utilizing their software implementations in a GUI constructed using wxPython and MPI, to synchronize the recorded EEG with events on the GUI, a proof-of-concept was constructed. The [*emokit*](https://github.com/openyou/emokit) library was used for recording EEG.
 
 <figure>
@@ -38,6 +38,6 @@ The previous research on Motor-Imagery and P300 EEG were pivotal starting points
 	<center><figcaption><b>P300 Speller GUI</b></figcaption></center>
 </figure>
 
-##Results
+## Results
 1. Accuracies were not promising, ranging from 65-70%. This resulted in a poorly functioning system.
 2. Upon running a number of tests, we realized that the electrode positions were problematic, in addition to the large amount of noise given out by the Emotiv.

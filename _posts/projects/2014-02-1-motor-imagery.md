@@ -14,13 +14,13 @@ category : project
 comments: false
 ---
 
-##Where
+## Where
 [*Zine Research Lab*](http://www.zine.co.in), NIT Jaipur
 
-##Objective
+## Objective
 EEG or Electroencephalogram refers to recordings of electrical activity in the brain. [Motor-Imagery EEG](http://www.wikiwand.com/en/Motor_imagery) is generated when users simulate an action mentally, such as *imagining your left hand move*. Our objective was to recognize these signals from processed EEG using [stochastic search algorithms](http://www.wikiwand.com/en/Stochastic_optimization), where we focussed on Genetic and Evolutionary algorithms.
 
-##Methodology
+## Methodology
 This was one of my first research initiatives during 2nd year of engineering. With the guidance of seniors, I learned and implemented various such algorithms. After applying several published methods and additional improvements to some classic algorithms in this area(*PSO*,*DEs*,etc) we were able to formulate two promising algorithms which showed impressive results.
 
 1. **BSA-NN** : A randomized backtracking swarm on a three layer neural-net, with minimal parameter tuning and parallelized OVA(one vs. all multiclass implementation). 
@@ -32,15 +32,15 @@ This was one of my first research initiatives during 2nd year of engineering. Wi
 	<center><figcaption><b>GSEA Architecture</b></figcaption></center>
 </figure>
 
-##Results
+## Results
 
 *Accuracy of 69% across 3 different subjects on a multiclass motor-imagery problem.* This performance is better than 21 previous approaches including the winning approach of BCI competition 3(dataset 2).
 
-##Publication
+## Publication
 
-####1. SK Agarwal, Saatvik Shah, and Rajesh Kumar. *"Classification of mental tasks from EEG data using backtracking search optimization based neural classifier."* Neurocomputing (2015). [URL](http://www.sciencedirect.com/science/article/pii/S0925231215003409)
+#### 1. SK Agarwal, Saatvik Shah, and Rajesh Kumar. *"Classification of mental tasks from EEG data using backtracking search optimization based neural classifier."* Neurocomputing (2015). [URL](http://www.sciencedirect.com/science/article/pii/S0925231215003409)
 
-####2. SK Agarwal , Saatvik Shah, and Rajesh Kumar. *"Group based Swarm evolution algorithm (GSEA) driven mental task classifier."* Memetic Computing 7.1 (2015): 19-27. [URL](http://link.springer.com/article/10.1007%2Fs12293-015-0155-0)
+#### 2. SK Agarwal , Saatvik Shah, and Rajesh Kumar. *"Group based Swarm evolution algorithm (GSEA) driven mental task classifier."* Memetic Computing 7.1 (2015): 19-27. [URL](http://link.springer.com/article/10.1007%2Fs12293-015-0155-0)
 
 
-##[Code@Github](https://github.com/saatvikshah1994/bsa-nn)
+## [Code@Github](https://github.com/saatvikshah1994/bsa-nn)

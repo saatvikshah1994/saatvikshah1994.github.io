@@ -51,13 +51,13 @@ image:
 <h1 align="center"  style="font-family:'Lato',Calibri,serif;font-size:3em">Publications</h1>
 
 
-####1. SK Agarwal, Saatvik Shah, and Rajesh Kumar. *"Classification of mental tasks from EEG data using backtracking search optimization based neural classifier."* Neurocomputing (2015). [URL](http://www.sciencedirect.com/science/article/pii/S0925231215003409)
+#### 1. SK Agarwal, Saatvik Shah, and Rajesh Kumar. *"Classification of mental tasks from EEG data using backtracking search optimization based neural classifier."* Neurocomputing (2015). [URL](http://www.sciencedirect.com/science/article/pii/S0925231215003409)
 
-####2. SK Agarwal , Saatvik Shah, and Rajesh Kumar. *"Group based Swarm evolution algorithm (GSEA) driven mental task classifier."* Memetic Computing 7.1 (2015): 19-27. [URL](http://link.springer.com/article/10.1007%2Fs12293-015-0155-0)
+#### 2. SK Agarwal , Saatvik Shah, and Rajesh Kumar. *"Group based Swarm evolution algorithm (GSEA) driven mental task classifier."* Memetic Computing 7.1 (2015): 19-27. [URL](http://link.springer.com/article/10.1007%2Fs12293-015-0155-0)
 
-####3. Saatvik Shah,Vaibhav Jain,Sarthak Jain,Anshul Mittal,Jatin Verma,Shubham Tripathi and Rajesh Kumar. *"Hierarchical classification for multilingual language identification and named entity recognition."* Proceedings of the Forum for Information Retrieval Evaluation, 2015(In Press). <br> [URL](http://irlab.daiict.ac.in/FIRE2015/WorkingNotes/T2-35-38-Shah.pdf) [Presentation]({{site.url}}/assets/extradocs/msir_fire2015.pdf)
+#### 3. Saatvik Shah,Vaibhav Jain,Sarthak Jain,Anshul Mittal,Jatin Verma,Shubham Tripathi and Rajesh Kumar. *"Hierarchical classification for multilingual language identification and named entity recognition."* Proceedings of the Forum for Information Retrieval Evaluation, 2015(In Press). <br> [URL](http://irlab.daiict.ac.in/FIRE2015/WorkingNotes/T2-35-38-Shah.pdf) [Presentation]({{site.url}}/assets/extradocs/msir_fire2015.pdf)
 
-####4. Saatvik Shah,Anirudha Kumar and Rajesh Kumar. *"A Robust framework for optimum feature extraction and recognition of P300 from raw EEG."* Neural Computing and Applications, 2015(Under Review) [URL](https://drive.google.com/file/d/0B3qdXauTZfQCMWppNVAzaHk1S1U/view?usp=sharing)
+#### 4. Saatvik Shah,Anirudha Kumar and Rajesh Kumar. *"A Robust framework for optimum feature extraction and recognition of P300 from raw EEG."* Neural Computing and Applications, 2015(Under Review) [URL](https://drive.google.com/file/d/0B3qdXauTZfQCMWppNVAzaHk1S1U/view?usp=sharing)
 
 <hr>
 <h1 align="center" style="font-family:'Lato',Calibri,serif;font-size:3em">Patents</h1>
@@ -68,25 +68,25 @@ image:
 
 <h1 align="center" style="font-family:'Lato',Calibri,serif;font-size:3em">Additional</h1>
 
-####1. [One Page Resume]({{site.url}}/assets/extradocs/Resume.pdf)
+#### 1. [One Page Resume]({{site.url}}/assets/extradocs/Resume.pdf)
 
-<!-- ####2. [A Longer CV](#) -->
+<!-- #### 2. [A Longer CV](#) -->
 
-####2. [A More Visual CV]({{site.url}}/assets/extradocs/Visual_CV.pdf)
+#### 2. [A More Visual CV]({{site.url}}/assets/extradocs/Visual_CV.pdf)
 
 
 <hr>
 
 <h1 align="center" style="font-family:'Lato',Calibri,serif;font-size:3em">Recess</h1>
 
-####Here's a list of things I like to do when I'm free:
+#### Here's a list of things I like to do when I'm free:
 
-####**TV Series/Anime** : I'm currently catching up on [Fargo](http://www.imdb.com/title/tt2802850/). Recently finished [Stein's Gate](http://www.imdb.com/title/tt1910272/), [Fullmetal Alchemist Brotherhood](http://www.imdb.com/title/tt1355642/) and [Tokyo Ghoul](http://www.imdb.com/title/tt3741634/).
+#### **TV Series/Anime** : I'm currently catching up on [Fargo](http://www.imdb.com/title/tt2802850/). Recently finished [Stein's Gate](http://www.imdb.com/title/tt1910272/), [Fullmetal Alchemist Brotherhood](http://www.imdb.com/title/tt1355642/) and [Tokyo Ghoul](http://www.imdb.com/title/tt3741634/).
 
-####**Munch!Munch!** : I **love** eating: be it *Chinese*,*Italian*,*Mexican* or *Indian*! 
+#### **Munch!Munch!** : I **love** eating: be it *Chinese*,*Italian*,*Mexican* or *Indian*! 
 
-####**Gaming** : Big fan of challenging First Person Shooters and RPGs. Currently binging on [Bloodborne](http://www.ign.com/games/bloodborne/ps4-20017456). When younger I had planned on being a Game Developer; didn't work out though :(
+#### **Gaming** : Big fan of challenging First Person Shooters and RPGs. Currently binging on [Bloodborne](http://www.ign.com/games/bloodborne/ps4-20017456). When younger I had planned on being a Game Developer; didn't work out though :(
 
-####**Ideating** : By ideating, I mean reading, listening or practicing  things I can learn from. Most of this ideating comes from **[Reddit](https://www.reddit.com/r/machinelearning)**,**[TheTalkingMachines](http://www.thetalkingmachines.com/)**, Kaggle's [competitions](http://kaggle.com/) and [No Free Hunch](http://blog.kaggle.com/) 
+#### **Ideating** : By ideating, I mean reading, listening or practicing  things I can learn from. Most of this ideating comes from **[Reddit](https://www.reddit.com/r/machinelearning)**,**[TheTalkingMachines](http://www.thetalkingmachines.com/)**, Kaggle's [competitions](http://kaggle.com/) and [No Free Hunch](http://blog.kaggle.com/) 
 
 <hr>
