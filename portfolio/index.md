@@ -6,7 +6,6 @@ tags: [about]
 comments: false
 image:
   feature: websitebg1.jpg
-permalink: /portfolio
 ---
 
 
