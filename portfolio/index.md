@@ -2,7 +2,6 @@
 title: Portfolio
 layout: portfolio-template
 description: 
-tags: [about]
 comments: false
 image:
   feature: websitebg1.jpg
