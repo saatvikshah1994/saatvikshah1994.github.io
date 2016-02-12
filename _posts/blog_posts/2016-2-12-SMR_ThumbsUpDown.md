@@ -102,7 +102,7 @@ The proposed technique is reported to have an accuracy of approximately **66%** 
 I have not run a test on the complete dataset. Tests on a small subsample gave decent results. I have currently thought out a plan to overcome the screen scraping limitations, but this is currently in development.
 
 <h2 id='whatsnext'>What's next?</h2>
-Next up, I'll be going into the details of a completely unsupervised system for sentiment analysis, by utilising **search engine results**.
+Next up, I'll be starting off on using a more recent method of representing textual data known as [Word Embeddings](https://en.wikipedia.org/wiki/Word_embedding).
 
 <h2 id='refs'>References</h2>
 <h4>Papers</h4>
