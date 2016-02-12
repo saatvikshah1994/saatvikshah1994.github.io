@@ -5,52 +5,47 @@ description: "An archive of posts."
 comments: false
 ---
 
-{% assign counter = 0 %}
 {% assign first_fill = 0 %}
-{% assign previous_year = 0 %}
 {% for post in site.posts %}
   {% if post.category == "blog-post" %}
-  	{% assign counter = counter | plus:1 %}
     {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
-    <!-- first fillup case start -->
+    {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
     {% if first_fill == 0 %}
-        <!-- first fillup case -->
-     {% assign first_fill = first_fill | plus:1 %}
+      {% assign first_fill = first_fill | plus:1 %}
       <article>
         <h2 id="{{ this_year }}-ref">{{ this_year }}</h2>
         <ul>
         <li class="entry-title"><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
     {% else %}
-    <!-- non-first fillup case -->
-      {% if this_year != previous_year %}
+      {% if this_year != next_year %}
         </ul>
         </article>
         <article>
-          <h2 id="{{ this_year }}-ref" class="year-heading">{{this_year}}</h2>
+          <h2 id="{{ next_year }}-ref" class="year-heading">{{next_year}}</h2>
           <ul>
         {% endif %}    
         <li class="entry-title"><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
     {% endif %}
-    <!-- first fillup case : end-->
-
-    <!-- last-post-in-loop-check start -->
-    {% if forloop.last and this_year != previous_year %}
-    	<!-- last-post-in-loop + this_year != previous_year -->
+    {% if forloop.last and this_year != next_year %}
         </ul>
         </article>
         <article>
-          <h2 id="{{ this_year }}-ref" class="year-heading">{{this_year}}</h2>
+          <h2 id="{{ next_year }}-ref" class="year-heading">{{next_year}}</h2>
           <ul>
           <li class="entry-title"><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
       	</ul>
       	</article>
-    {% elsif forloop.last and this_year == previous_year %} 
-    <!-- last-post-in-loop + this_year == previous_year -->
+    {% elsif forloop.last and this_year == next_year %} 
       </ul>
-      </article>
+      </article>    
     {% else %}
+      {% if this_year != next_year %}
+        </ul>
+        </article>
+        <article>
+          <h2 id="{{ next_year }}-ref" class="year-heading">{{next_year}}</h2>
+          <ul>
+        {% endif %}
     {% endif %}
-    <!-- last-post-in-loop-check end -->
-    {% capture previous_year %}{{ post.date | date: "%Y" }}{% endcapture %}
   {% endif %}
 {% endfor %}

@@ -20,6 +20,7 @@ The usual modus-operandi of searching for the term on [Google](http://www.google
 </figure>
 
 Not bad, in fact let's stick with the first half of the definition above
+
 > An ensemble is a technique for combining many weak learners in an attempt to produce a strong learner.
 
 The key term here is *combining* and *learners*. Here the *learners* refer to the algorithm which you are using for estimating values from testing data(be it classification or regression), once they have learnt from the given training data.
