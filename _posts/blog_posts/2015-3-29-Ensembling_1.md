@@ -4,7 +4,7 @@ title: A Glance at Ensembling
 image:
   feature: /ensembling_1/ensemble_introimg.jpg 
 description: "Ensembling"
-tags: [machine learning,ensemble]
+tags: [Machine Learning]
 category: blog-post
 ---
 
