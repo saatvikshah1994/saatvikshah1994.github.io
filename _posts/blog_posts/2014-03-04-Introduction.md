@@ -2,7 +2,7 @@
 layout: post
 title: Hello Blog!
 description: "An introductory blog post"
-tags: [intro]
+tags: [Introduction]
 category: blog-post
 ---
 
