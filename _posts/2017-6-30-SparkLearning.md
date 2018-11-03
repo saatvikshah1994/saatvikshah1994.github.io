@@ -1,11 +1,10 @@
 ---
 layout: post
 title: ! "Apache Spark: A Learning Path"
-image:
-  feature: /spark/header.jpg 
 description: "Learning Path for Apache Spark"
-tags: Spark
-category: blog-post
+image:
+  feature: /spark/header.jpg
+tags: [Spark]
 ---
 
 <h2 id='intro'>Background</h2>

@@ -4,8 +4,7 @@ title: Sentiment Analysis Primer - Part 2
 image:
   feature: /smr_intro/smileys-bg.jpg 
 description: "Sentiment Analysis Primer"
-tags: [Sentiment Analysis]
-category: blog-post
+tags: [Machine Learning]
 ---
 
 <h2 id='intro'>Introduction</h2>

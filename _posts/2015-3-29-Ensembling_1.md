@@ -5,7 +5,6 @@ image:
   feature: /ensembling_1/ensemble_introimg.jpg 
 description: "Ensembling"
 tags: [Machine Learning]
-category: blog-post
 ---
 
 [//]: # (Image from http://cse-wiki.unl.edu/wiki/index.php/Bagging_and_Boosting)

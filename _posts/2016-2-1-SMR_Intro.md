@@ -4,8 +4,7 @@ title: Sentiment Analysis Primer - Part 1
 image:
   feature: /smr_intro/smileys-bg.jpg 
 description: "Sentiment Analysis Primer"
-tags: [Sentiment Analysis]
-category: blog-post
+tags: [Machine Learning]
 ---
 
 <!-- For addressing the multi-image captioning feature-->
@@ -158,7 +157,7 @@ Often referred to as Data cleaning as well, text preprocessing generally consist
 6. Removal of extra spaces in the begginning or the end
 
 Here is a class function which achieves the desired effect:
-{% highlight python linenos=table %}
+{% highlight python linenos %}
 def clean_sentence(self,sentence):
     if self.html_clean:	# Optional flag
         sentence = BeautifulSoup(sentence).get_text()	# removing html markup
