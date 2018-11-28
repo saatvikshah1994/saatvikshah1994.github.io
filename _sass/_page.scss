@@ -276,6 +276,10 @@ header .entry-meta {
 		background-color: #fff;
 		box-shadow: 0 0 0 0, 0 6px 12px rgba(#000,0.1);
 		border-radius: 3px;
+		.toc li { line-height: 1em; list-style-position: inside; }
+		.toc ul { list-style-type: square; margin: 0.5em; list-style-position: inside;}
+		.toc li ul li { line-height: 1em; list-style-position: inside;}
+		.toc a { font-size:0.9em }
 
 		@media #{$medium} {
 			margin-left: 10px;

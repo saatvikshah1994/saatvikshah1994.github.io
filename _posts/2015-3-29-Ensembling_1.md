@@ -3,7 +3,7 @@ layout: post
 title: A Glance at Ensembling
 image:
   feature: /ensembling_1/ensemble_introimg.jpg 
-description: "Ensembling"
+description: "Motivation, Bagging, Boosting and other Variants, Use Cases"
 tags: [Machine Learning]
 ---
 
