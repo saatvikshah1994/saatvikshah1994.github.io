@@ -21,6 +21,9 @@ image:
     {% else %}
       <center><h1 class="entry-title"><a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">{{ post.title }}</a></h1></center>
     {% endif %}
+    {% if post.level %}
+    <center><p><em><i>Level: {{ post.level }}</i></em></center>
+    {% endif %}
     {% if post.description %}
     <center><p><em><b>{{ post.description }}</b></em></center>
     {% endif %}

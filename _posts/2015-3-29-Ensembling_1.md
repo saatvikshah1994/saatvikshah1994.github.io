@@ -1,6 +1,7 @@
 ---
 layout: post
 title: A Glance at Ensembling
+level: Beginner
 image:
   feature: /ensembling_1/ensemble_introimg.jpg 
 description: "Motivation, Bagging, Boosting and other Variants, Use Cases"

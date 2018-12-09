@@ -1,7 +1,8 @@
 ---
 layout: post
-title: ! "Smart Pointers: The Wild West Tour(Part 1)"
+title: ! "A Wild West Tour of Smart Pointers - I"
 description: "Motivation, Categorization, What to Choose?, Scoped and unique pointers in-depth including Performance and Microbenchmarks, Thread-Safety, Passing them around and more."
+level: Beginner
 image:
   feature: smartptr/header.jpg
 tags: [C++]
@@ -19,7 +20,7 @@ Smart Pointers are a construct in C++ to aid programmers in tackling **memory ma
 <li><a href="#choices">Which to Choose?</a></li>
 </ul>
 </li>
-<li><a href="#scopedptr">Single Ownership Construct #1: Scoped Pointers</a>
+<li><a href="#scopedptr">Scoped Pointers</a>
 <ul>
 <li><a href="#scoped_usecase">General Use Case</a></li>
 <li><a href="#scoped_size">Performance(size)</a></li>
@@ -29,7 +30,7 @@ Smart Pointers are a construct in C++ to aid programmers in tackling **memory ma
 <li><a href="#scoped_variants">Standard Variants</a></li>
 </ul>
 </li>
-<li><a href="#uniqptr">Single Ownership Construct #2: Unique Pointers</a>
+<li><a href="#uniqptr">Unique Pointers</a>
 <ul>
 <li><a href="#uniq_usecase">General Use Case</a></li>
 <li><a href="#uniq_size">Performance(size)</a></li>
@@ -72,16 +73,13 @@ Surely, you must be scratching your head about which is the right one to choose.
 <figure>
     <center><a href="{{ site.url }}/images/smartptr/preference_order.png"><img src="{{ site.url }}/images/smartptr/preference_order.png" alt="" height="100%" width="80%" align="middle" /></a></center>
 </figure>
-I've augmented the poster with two additional pointer types not covered in the talk at the preference order where I feel they appropriately belong. In summary the order would be:
-`locals/members` > `scoped pointer` > `unique pointer` > `shared_ptr` > `intrusive_ptr`<br>
-For `locals/members` it is clear since C++ will automatically manage its lifetime by default.
-```c++
-{ // create a new scope
-std::string my_horse = "arabian horse"; // add a local in the scope
-}
-std::cout << my_horse << std::endl; // not available
-```
-Now, let's go through the others. As a matter of convenience, I'll be using a sample class:
+I've augmented the poster with two additional pointer types not covered in the talk at the preference order where I feel they appropriately belong. In summary the order would be:<br>
+`locals/members` > `scoped pointer` > `unique pointer` > `shared_ptr` ~= `intrusive_ptr`<br>
+A few comments on the above ordering:
+- On paper, Intrusive pointers seem like they should be preferred. But its usage involves the inconvenience of having to define the embedded refcount and doing so correctly. This it is not ideal/possible to use to use it in many instances.
+- If unsure about whether to go for single or shared ownership, always start with `unique_ptr`. If the situation for shared ownership comes up, directly replacing `unique_ptr->shared_ptr` should automatically work in most cases.
+
+As a matter of convenience in the future, I'll be using a sample class:
 ```c++
 class WildWestGang{
     // Note, that std::cout's will be disabled during performance testing.

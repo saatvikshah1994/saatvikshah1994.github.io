@@ -2,6 +2,7 @@
 layout: post
 title: ! "Apache Spark: A Learning Path"
 description: "Learning Path for Apache Spark"
+level: Beginner
 image:
   feature: /spark/header.jpg
 tags: [Spark]

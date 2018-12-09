@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Sentiment Analysis Primer - Part 2
+level: Beginner
 image:
   feature: /smr_intro/smileys-bg.jpg 
 description: "Sentiment Analysis Primer Part 2"
